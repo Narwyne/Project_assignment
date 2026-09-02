@@ -7,7 +7,7 @@ if ($navAvatar === null && isset($pdo)) {
     $navAvatar = $stmt->fetchColumn() ?: "";
     $_SESSION["avatar"] = $navAvatar;
 }
-$dashboardPage = $_SESSION["role"] === "buyer" ? "buyer.php" : "seller.php";
+$role = $_SESSION["role"];
 $currentPage = basename($_SERVER["PHP_SELF"]);
 ?>
 <div class="nav">
@@ -15,8 +15,13 @@ $currentPage = basename($_SERVER["PHP_SELF"]);
     <span class="nav-logo">🛍️</span>
     <span class="nav-title">MarketConnect</span>
     <div class="nav-links">
-      <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">Dashboard</a>
-      <a href="feed.php" class="<?= $currentPage === "feed.php" ? "active" : "" ?>">Feed</a>
+      <?php if ($role === "admin"): ?>
+        <a href="admin.php" class="<?= $currentPage === "admin.php" ? "active" : "" ?>">Categories</a>
+      <?php else: ?>
+        <?php $dashboardPage = $role === "buyer" ? "buyer.php" : "seller.php"; ?>
+        <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">Dashboard</a>
+        <a href="feed.php" class="<?= $currentPage === "feed.php" ? "active" : "" ?>">Feed</a>
+      <?php endif; ?>
     </div>
   </div>
   <div class="nav-user">

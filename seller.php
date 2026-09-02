@@ -5,24 +5,33 @@ if (($_SESSION["role"] ?? "") !== "seller") { header("Location: login.php"); exi
 $seller_id = $_SESSION["user_id"];
 
 $q = trim($_GET["q"] ?? "");
+$category_id = (int)($_GET["category_id"] ?? 0);
 
+$where = [];
+$params = [];
 if ($q !== "") {
-    $stmt = $pdo->prepare("
-      SELECT p.*, u.username AS buyer_name FROM posts p
-      JOIN users u ON u.id = p.buyer_id
-      WHERE p.title LIKE ? OR p.description LIKE ?
-      ORDER BY p.created_at DESC
-    ");
-    $like = "%$q%";
-    $stmt->execute([$like, $like]);
-} else {
-    $stmt = $pdo->query("
-      SELECT p.*, u.username AS buyer_name FROM posts p
-      JOIN users u ON u.id = p.buyer_id
-      ORDER BY p.created_at DESC
-    ");
+    $where[] = "(p.title LIKE ? OR p.description LIKE ?)";
+    $params[] = "%$q%";
+    $params[] = "%$q%";
 }
+if ($category_id) {
+    $where[] = "p.category_id = ?";
+    $params[] = $category_id;
+}
+$whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
+
+$stmt = $pdo->prepare("
+  SELECT p.*, u.username AS buyer_name, c.name AS category_name
+  FROM posts p
+  JOIN users u ON u.id = p.buyer_id
+  LEFT JOIN categories c ON c.id = p.category_id
+  $whereSql
+  ORDER BY p.created_at DESC
+");
+$stmt->execute($params);
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,8 +47,14 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <h2>Buyer Requests</h2>
   <form method="GET" class="search-bar">
     <input type="text" name="q" placeholder="Search requests..." value="<?= htmlspecialchars($q) ?>">
+    <select name="category_id" onchange="this.form.submit()">
+      <option value="">All categories</option>
+      <?php foreach ($categories as $c): ?>
+        <option value="<?= $c['id'] ?>" <?= $category_id === (int)$c['id'] ? "selected" : "" ?>><?= htmlspecialchars($c['name']) ?></option>
+      <?php endforeach; ?>
+    </select>
     <button type="submit">Search</button>
-    <?php if ($q !== ""): ?><a href="seller.php" class="btn-small">Clear</a><?php endif; ?>
+    <?php if ($q !== "" || $category_id): ?><a href="seller.php" class="btn-small">Clear</a><?php endif; ?>
   </form>
 
   <?php if (!$posts): ?>
@@ -48,6 +63,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <?php foreach ($posts as $post): ?>
     <div class="post-card">
+      <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
       <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
       <small>Posted by <a href="view_profile.php?id=<?= $post['buyer_id'] ?>"><?= htmlspecialchars($post["buyer_name"]) ?></a> · <?= $post["created_at"] ?></small><br>

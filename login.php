@@ -15,7 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["role"] = $user["role"];
         $_SESSION["username"] = $user["username"];
-        header("Location: " . ($user["role"] === "buyer" ? "buyer.php" : "seller.php"));
+        if ($user["role"] === "buyer") {
+            header("Location: buyer.php");
+        } elseif ($user["role"] === "seller") {
+            header("Location: seller.php");
+        } else {
+            header("Location: admin.php");
+        }
         exit;
     } else {
         $error = "Invalid username or password.";
