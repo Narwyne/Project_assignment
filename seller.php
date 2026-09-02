@@ -27,8 +27,9 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seller Feed</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Styles/seller.css">
 </head>
 <body class="wide">
 <div class="page">

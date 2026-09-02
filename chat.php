@@ -48,8 +48,9 @@ $backLink = $role === "buyer" ? "buyer.php" : "seller.php";
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Styles/chat.css">
 </head>
 <body class="wide">
 <div class="page">
