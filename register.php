@@ -32,10 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
 <div class="card">
-  <h2>Register</h2>
+  <div class="brand">🛍️</div>
+  <h2>Create account</h2>
+  <p class="subtitle">Join as a buyer or seller</p>
   <?php if ($error) echo "<p class='error'>$error</p>"; ?>
   <form method="POST">
-    <input name="username" placeholder="Username" required>
+    <input name="username" placeholder="Username" required autofocus>
     <input name="password" type="password" placeholder="Password" required>
     <div class="roles">
       <label><input type="radio" name="role" value="buyer" required> Buyer</label>

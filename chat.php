@@ -13,12 +13,11 @@ $stmt->execute([$post_id]);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$post) { die("Post not found."); }
 
-// permission: buyer must own the post, seller can message about any post
 if ($role === "buyer" && $post["buyer_id"] != $my_id) {
     die("Not authorized.");
 }
 if ($role === "seller") {
-    $with = $post["buyer_id"]; // seller always talks to the post's buyer
+    $with = $post["buyer_id"];
 }
 
 $stmt = $pdo->prepare("SELECT username FROM users WHERE id = ?");
@@ -52,9 +51,9 @@ $backLink = $role === "buyer" ? "buyer.php" : "seller.php";
   <title>Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="wide">
 <div class="page">
-  <?php include "partials/header.php"; ?>
+  <?php include "header.php"; ?>
 
   <a href="<?= $backLink ?>">&larr; Back</a>
   <h2><?= htmlspecialchars($post["title"]) ?></h2>

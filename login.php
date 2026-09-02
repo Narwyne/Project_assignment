@@ -30,10 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
 <div class="card">
-  <h2>Login</h2>
+  <div class="brand">🛍️</div>
+  <h2>Welcome back</h2>
+  <p class="subtitle">Log in to your account</p>
   <?php if ($error) echo "<p class='error'>$error</p>"; ?>
   <form method="POST">
-    <input name="username" placeholder="Username" required>
+    <input name="username" placeholder="Username" required autofocus>
     <input name="password" type="password" placeholder="Password" required>
     <button type="submit">Login</button>
   </form>
