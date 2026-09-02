@@ -52,6 +52,8 @@ $categories = $pdo->query("
 
 $editId = (int)($_GET["edit"] ?? 0);
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

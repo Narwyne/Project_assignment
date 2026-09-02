@@ -47,8 +47,8 @@ body.wide {
   font-family: 'Segoe UI', Arial, sans-serif;
   align-items: flex-start; background: #f2f4f7; margin: 0; min-height: 100vh;
 }
-.page { width: 100%; max-width: 640px; margin: 0 auto; padding: 20px; }
-.nav a { color: #4f46e5; text-decoration: none; }
+.page { width: 100%; max-width: 700px; margin: 0 auto; padding: 20px; }
+.nav a { color: #efeff3; text-decoration: none; }
 .nav a:hover { text-decoration: underline; }
 h2 { color: #222; }
 .post-form {
@@ -104,18 +104,6 @@ h2 { color: #222; }
   .post-card { padding: 14px; border-radius: 10px; }
   .search-bar { flex-wrap: wrap; }
   .search-bar input { width: 100%; flex: 1 1 100%; }
-  .search-bar select { width: 100%; }
   .search-bar button, .search-bar a.btn-small { flex: 1; text-align: center; }
   h2 { font-size: 19px; }
 }
-
-.tag {
-  display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.3px; color: #4338ca; background: #eef0fe; padding: 3px 9px;
-  border-radius: 20px; margin-bottom: 8px;
-}
-.search-bar select, .post-form select {
-  padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
-  background: #fff; font-family: inherit;
-}
-

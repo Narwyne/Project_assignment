@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "config.php";
+require "notifications_helper.php";
 if (!isset($_SESSION["user_id"])) { header("Location: login.php"); exit; }
 
 $my_id   = $_SESSION["user_id"];
@@ -30,10 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($msg) {
         $stmt = $pdo->prepare("INSERT INTO messages (post_id, sender_id, receiver_id, message) VALUES (?, ?, ?, ?)");
         $stmt->execute([$post_id, $my_id, $with, $msg]);
+        create_notification(
+            $pdo, $with, $my_id, $post_id,
+            $_SESSION["username"] . " commented on \"" . $post["title"] . "\""
+        );
         header("Location: chat.php?post_id=$post_id&with=$with");
         exit;
     }
 }
+
+// opening this thread clears any unread notifications for it
+mark_thread_read($pdo, $my_id, $with, $post_id);
 
 $stmt = $pdo->prepare("
   SELECT * FROM messages
