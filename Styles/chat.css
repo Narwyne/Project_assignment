@@ -44,8 +44,8 @@ body.wide {
   font-family: 'Segoe UI', Arial, sans-serif;
   align-items: flex-start; background: #f2f4f7; margin: 0; min-height: 100vh;
 }
-.page { width: 100%; max-width: 700px; margin: 0 auto; padding: 20px; }
-.nav a { color: #4f46e5; text-decoration: none; }
+.page { width: 100%; max-width: 640px; margin: 0 auto; padding: 20px; }
+.nav a { color: #f2f2f5; text-decoration: none; }
 a { color: #4f46e5; text-decoration: none; }
 a:hover { text-decoration: underline; }
 h2 { color: #222; }
@@ -74,34 +74,26 @@ h2 { color: #222; }
   .msg { max-width: 85%; }
   h2 { font-size: 19px; }
 }
-.notif-wrap { position: relative; }
-.notif-bell {
-  position: relative; background: none; border: none; font-size: 18px; cursor: pointer;
-  padding: 6px 8px; border-radius: 8px; line-height: 1;
-}
-.notif-bell:hover { background: #f2f4f7; }
-.notif-badge {
-  position: absolute; top: -2px; right: -2px; background: #d92d20; color: #fff;
-  font-size: 10px; font-weight: 700; min-width: 16px; height: 16px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center; padding: 0 3px;
-}
-.notif-dropdown {
-  display: none; position: absolute; top: calc(100% + 8px); right: 0; width: 300px;
-  max-height: 360px; overflow-y: auto; background: #fff; border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 50; padding: 6px;
-}
-.notif-dropdown.open { display: block; }
-.notif-item {
-  display: flex; gap: 10px; align-items: flex-start; padding: 10px; border-radius: 8px;
-  text-decoration: none; color: #222;
-}
-.notif-item:hover { background: #f5f6fb; text-decoration: none; }
-.notif-item.unread { background: #eef0fe; }
-.notif-item.unread:hover { background: #e4e7fc; }
-.notif-text { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
-.notif-text small { color: #888; font-size: 11px; }
-.notif-empty { padding: 16px; text-align: center; color: #888; font-size: 13px; }
 
+.nav-secondary {
+  display: flex;
+  gap: 6px;
+  background: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  flex-wrap: wrap;
+}
+.nav-secondary a {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 7px;
+  color: #444;
+}
+.nav-secondary a.active { color: #4f46e5; background: #eef0fe; font-weight: 600; }
+.nav-secondary a:hover { background: #f2f4f7; text-decoration: none; }
 @media (max-width: 480px) {
-  .notif-dropdown { position: fixed; top: 64px; right: 8px; left: 8px; width: auto; }
+  .nav-secondary a { flex: 1; text-align: center; }
 }
