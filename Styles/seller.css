@@ -1,3 +1,6 @@
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -12,8 +15,16 @@
 }
 .nav-brand { display: flex; align-items: center; gap: 10px; }
 .nav-logo { font-size: 24px; line-height: 1; }
+.nav-links { display: flex; align-items: center; gap: 14px; margin-left: 12px; font-size: 14px; font-weight: 500; }
+.nav-links a.active { color: #222; text-decoration: underline; text-underline-offset: 3px; }
 .nav-title { font-size: 17px; font-weight: 700; color: #222; letter-spacing: -0.2px; }
 .nav-user { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nav-profile-link { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.avatar-img { border-radius: 50%; object-fit: cover; display: block; }
+.avatar-fallback {
+  border-radius: 50%; background: #4f46e5; color: #fff; display: flex;
+  align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;
+}
 .nav-hello { font-size: 14px; color: #444; }
 .nav-role {
   font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
@@ -29,6 +40,7 @@
   .nav { padding: 14px 16px; }
   .nav-title { font-size: 15px; }
   .nav-hello { display: none; }
+  .nav-links { margin-left: 0; }
 }
 * { box-sizing: border-box; }
 body.wide {

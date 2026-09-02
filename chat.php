@@ -58,7 +58,7 @@ $backLink = $role === "buyer" ? "buyer.php" : "seller.php";
 
   <a href="<?= $backLink ?>">&larr; Back</a>
   <h2><?= htmlspecialchars($post["title"]) ?></h2>
-  <p>Chat with <strong><?= htmlspecialchars($otherUser["username"]) ?></strong></p>
+  <p>Chat with <a href="view_profile.php?id=<?= $with ?>"><strong><?= htmlspecialchars($otherUser["username"]) ?></strong></a></p>
 
   <div class="chat-box">
     <?php foreach ($messages as $m): ?>

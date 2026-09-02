@@ -1,8 +1,9 @@
 <?php
 session_start();
 require "config.php";
-if (($_SESSION["role"] ?? "") !== "seller") { header("Location: login.php"); exit; }
-$seller_id = $_SESSION["user_id"];
+if (!isset($_SESSION["user_id"])) { header("Location: login.php"); exit; }
+$my_id = $_SESSION["user_id"];
+$role  = $_SESSION["role"];
 
 $q = trim($_GET["q"] ?? "");
 
@@ -23,23 +24,25 @@ if ($q !== "") {
     ");
 }
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Seller Feed</title>
-  <link rel="stylesheet" href="Styles/seller.css">
+  <title>Feed</title>
+  <link rel="stylesheet" href="Styles/feed.css">
 </head>
 <body class="wide">
 <div class="page">
   <?php include "header.php"; ?>
 
-  <h2>Buyer Requests</h2>
+  <h2>All Requests</h2>
   <form method="GET" class="search-bar">
-    <input type="text" name="q" placeholder="Search requests..." value="<?= htmlspecialchars($q) ?>">
+    <input type="text" name="q" placeholder="Search all requests..." value="<?= htmlspecialchars($q) ?>">
     <button type="submit">Search</button>
-    <?php if ($q !== ""): ?><a href="seller.php" class="btn-small">Clear</a><?php endif; ?>
+    <?php if ($q !== ""): ?><a href="feed.php" class="btn-small">Clear</a><?php endif; ?>
   </form>
 
   <?php if (!$posts): ?>
@@ -47,11 +50,20 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php endif; ?>
 
   <?php foreach ($posts as $post): ?>
+    <?php $isMine = $role === "buyer" && (int)$post["buyer_id"] === (int)$my_id; ?>
     <div class="post-card">
+      <?php if ($isMine): ?><span class="badge-mine">Your post</span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
       <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
       <small>Posted by <a href="view_profile.php?id=<?= $post['buyer_id'] ?>"><?= htmlspecialchars($post["buyer_name"]) ?></a> · <?= $post["created_at"] ?></small><br>
-      <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $post['buyer_id'] ?>">Message Buyer</a>
+
+      <div class="post-actions">
+        <?php if ($role === "seller"): ?>
+          <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $post['buyer_id'] ?>">Message Buyer</a>
+        <?php elseif ($isMine): ?>
+          <a class="btn-small" href="buyer.php?edit=<?= $post['id'] ?>">Edit</a>
+        <?php endif; ?>
+      </div>
     </div>
   <?php endforeach; ?>
 </div>

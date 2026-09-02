@@ -1,0 +1,95 @@
+.nav {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #fff; padding: 16px 22px; border-radius: 10px; margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07); flex-wrap: wrap; gap: 10px;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; }
+.nav-logo { font-size: 24px; line-height: 1; }
+.nav-links { display: flex; align-items: center; gap: 14px; margin-left: 12px; font-size: 14px; font-weight: 500; }
+.nav-links a.active { color: #222; text-decoration: underline; text-underline-offset: 3px; }
+.nav-title { font-size: 17px; font-weight: 700; color: #222; letter-spacing: -0.2px; }
+.nav-user { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nav-hello { font-size: 14px; color: #444; }
+.nav-role {
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
+  color: #4f46e5; background: #eef0fe; padding: 4px 10px; border-radius: 20px; display: inline-block;
+}
+.nav-logout {
+  font-size: 13px; font-weight: 500; color: #fff; background: #4f46e5;
+  padding: 7px 14px; border-radius: 7px; text-decoration: none;
+}
+.nav-logout:hover { background: #4338ca; text-decoration: none; }
+.nav-profile-link { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+
+body.wide { font-family: 'Segoe UI', Arial, sans-serif; align-items: flex-start; background: #f2f4f7; margin: 0; min-height: 100vh; }
+.page { width: 100%; max-width: 640px; margin: 0 auto; padding: 20px; }
+a { color: #4f46e5; text-decoration: none; }
+a:hover { text-decoration: underline; }
+h2 { color: #222; }
+
+.avatar-img { border-radius: 50%; object-fit: cover; display: block; }
+.avatar-fallback {
+  border-radius: 50%; background: #4f46e5; color: #fff; display: flex;
+  align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;
+}
+
+.profile-card {
+  background: #fff; padding: 20px; border-radius: 10px; margin: 16px 0 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07); text-align: left;
+}
+.profile-card label { display: block; font-size: 13px; font-weight: 600; color: #444; margin: 12px 0 4px; }
+.profile-card input, .profile-card textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit;
+}
+.profile-card input:disabled { background: #f5f5f7; color: #888; }
+.profile-card textarea { min-height: 80px; resize: vertical; }
+.profile-card button {
+  margin-top: 16px; padding: 11px; width: 100%; background: #4f46e5; color: #fff;
+  border: none; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer;
+}
+.profile-card button:hover { background: #4338ca; }
+
+.avatar-row { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+.avatar-upload { display: flex; flex-direction: column; gap: 6px; }
+.file-label { width: auto; display: inline-block; cursor: pointer; }
+.hint { font-size: 12px; color: #888; }
+
+.btn-small {
+  background: #4f46e5; color: #fff; padding: 6px 12px; border-radius: 6px;
+  font-size: 13px; text-decoration: none; display: inline-block;
+}
+.btn-small:hover { background: #4338ca; text-decoration: none; }
+
+.error {
+  color: #d92d20; background: #fef3f2; border: 1px solid #fecdca;
+  border-radius: 8px; padding: 8px 10px; font-size: 13px; margin: 12px 0;
+}
+.success {
+  color: #067647; background: #ecfdf3; border: 1px solid #abefc6;
+  border-radius: 8px; padding: 8px 10px; font-size: 13px; margin: 12px 0;
+}
+
+.profile-header { display: flex; align-items: center; gap: 16px; }
+.profile-header h2 { margin: 0 0 4px; }
+.profile-bio { margin: 16px 0; color: #333; line-height: 1.5; }
+.profile-bio.muted { color: #999; }
+.profile-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: #555; margin-bottom: 12px; }
+
+.post-card {
+  background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06); text-align: left;
+}
+.post-card h3 { margin: 0 0 6px; }
+.post-card small { color: #888; }
+.post-actions { display: flex; gap: 8px; margin: 10px 0 0; }
+
+@media (max-width: 480px) {
+  .page { padding: 12px; }
+  .nav { padding: 14px 16px; }
+  .nav-title { font-size: 15px; }
+  .nav-hello { display: none; }
+  .nav-links { margin-left: 0; }
+  .profile-card { padding: 14px; }
+  .avatar-row { gap: 12px; }
+  .profile-header { flex-wrap: wrap; }
+}

@@ -123,7 +123,7 @@ $repliesStmt = $pdo->prepare("
             <ul>
               <?php foreach ($sellers as $s): ?>
                 <li>
-                  <?= htmlspecialchars($s["username"]) ?>
+                  <a href="view_profile.php?id=<?= $s['sender_id'] ?>"><?= htmlspecialchars($s["username"]) ?></a>
                   <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $s['sender_id'] ?>">Reply</a>
                 </li>
               <?php endforeach; ?>
