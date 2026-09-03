@@ -16,10 +16,6 @@ $currentPage = basename($_SERVER["PHP_SELF"]);
     <span class="nav-title">HanapMo</span>
   </div>
   <div class="nav-user">
-    <a href="profile.php" class="nav-profile-link">
-      <?php render_avatar($_SESSION["username"], $navAvatar, 30); ?>
-      <span class="nav-hello">Hi, <?= htmlspecialchars($_SESSION["username"]) ?></span>
-    </a>
     <span class="nav-role"><?= htmlspecialchars(ucfirst($_SESSION["role"])) ?></span>
     <a href="logout.php" class="nav-logout">Logout</a>
   </div>
@@ -31,5 +27,7 @@ $currentPage = basename($_SERVER["PHP_SELF"]);
     <?php $dashboardPage = $role === "buyer" ? "buyer.php" : "seller.php"; ?>
     <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">🏠 Dashboard</a>
     <a href="feed.php" class="<?= $currentPage === "feed.php" ? "active" : "" ?>">📰 Feed</a>
+    <a href="notifications.php" class="<?= $currentPage === "notifications.php" ? "active" : "" ?>">🔔 Notifications</a>
+    <a href="profile.php" class="<?= $currentPage === "profile.php" ? "active" : "" ?>">👤 Profile</a>
   <?php endif; ?>
 </div>
