@@ -67,7 +67,7 @@ $repliesStmt = $pdo->prepare("
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Buyer Dashboard</title>
-  <link rel="stylesheet" href="Styles/buyer.css">
+  <link rel="stylesheet" href="Styles/DFNP.css">
 </head>
 <body class="wide">
 <div class="page">

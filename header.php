@@ -10,6 +10,7 @@ if ($navAvatar === null && isset($pdo)) {
 $role = $_SESSION["role"];
 $currentPage = basename($_SERVER["PHP_SELF"]);
 ?>
+<link rel="stylesheet" href="Styles/header.css">
 <div class="nav">
   <div class="nav-brand">
     <span class="nav-logo">🛍️</span>

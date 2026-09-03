@@ -1,0 +1,12 @@
+.nav-secondary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-secondary a {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+}

@@ -38,7 +38,7 @@ $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAl
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seller Feed</title>
-  <link rel="stylesheet" href="Styles/seller.css">
+  <link rel="stylesheet" href="Styles/DFNP.css">
 </head>
 <body class="wide">
 <div class="page">

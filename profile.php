@@ -63,13 +63,13 @@ $backLink = $_SESSION["role"] === "buyer" ? "buyer.php" : "seller.php";
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Profile</title>
+  <link rel="stylesheet" href="Styles/DFNP.css">
   <link rel="stylesheet" href="Styles/profile.css">
 </head>
 <body class="wide">
 <div class="page">
   <?php include "header.php"; ?>
 
-  <a href="<?= $backLink ?>">&larr; Back</a>
   <h2>My Profile</h2>
 
   <?php if ($error): ?><p class="error"><?= htmlspecialchars($error) ?></p><?php endif; ?>

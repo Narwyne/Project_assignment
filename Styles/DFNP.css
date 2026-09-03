@@ -12,6 +12,8 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   flex-wrap: wrap;
   gap: 10px;
+  outline: 2px solid rgb(86,3,25); /* Stroke color */
+  outline-offset: -2px; /* Moves outline inside */
 }
 .nav-brand { display: flex; align-items: center; gap: 10px; }
 .nav-logo { font-size: 24px; line-height: 1; }
@@ -48,12 +50,14 @@ body.wide {
   align-items: flex-start; background: #f2f4f7; margin: 0; min-height: 100vh;
 }
 .page { width: 100%; max-width: 640px; margin: 0 auto; padding: 20px; }
-.nav a { color: #faf9fc; text-decoration: none; }
+.nav a { color: #eeeeef; text-decoration: none; }
 .nav a:hover { text-decoration: underline; }
 h2 { color: #222; }
 .post-form {
   background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 24px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    outline: 2px solid rgb(86,3,25); /* Stroke color */
+  outline-offset: -2px; /* Moves outline inside */
 }
 .post-form input, .post-form textarea {
   width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;
@@ -68,6 +72,8 @@ h2 { color: #222; }
 .post-card {
   background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06); text-align: left;
+  outline: 2px solid rgb(86,3,25); /* Stroke color */
+  outline-offset: -2px; /* Moves outline inside */
 }
 .post-card h3 { margin: 0 0 6px; }
 .post-card small { color: #888; }
@@ -101,11 +107,16 @@ h2 { color: #222; }
 /* --- mobile responsive --- */
 @media (max-width: 480px) {
   .page { padding: 12px; }
-  .post-card { padding: 14px; border-radius: 10px; }
+  .post-form, .post-card { padding: 14px; border-radius: 10px; }
   .search-bar { flex-wrap: wrap; }
   .search-bar input { width: 100%; flex: 1 1 100%; }
   .search-bar select { width: 100%; }
   .search-bar button, .search-bar a.btn-small { flex: 1; text-align: center; }
+  .post-actions { flex-wrap: wrap; }
+  .post-actions a.btn-small, .post-actions form { flex: 1; }
+  .post-actions .btn-danger { width: 100%; }
+  .replies li { flex-wrap: wrap; gap: 6px; }
+  .replies li a.btn-small { margin-left: auto; }
   h2 { font-size: 19px; }
 }
 
@@ -128,6 +139,8 @@ h2 { color: #222; }
   margin-bottom: 22px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   flex-wrap: wrap;
+  outline: 2px solid rgb(86,3,25); /* Stroke color */
+  outline-offset: -2px; /* Moves outline inside */
 }
 .nav-secondary a {
   font-size: 14px;

@@ -41,7 +41,7 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Feed</title>
-  <link rel="stylesheet" href="Styles/feed.css">
+  <link rel="stylesheet" href="Styles/DFNP.css">
 </head>
 <body class="wide">
 <div class="page">
