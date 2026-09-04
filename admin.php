@@ -59,6 +59,7 @@ $editId = (int)($_GET["edit"] ?? 0);
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin · Categories</title>
+  <link rel="stylesheet" href="Styles/DFNP.css">
   <link rel="stylesheet" href="Styles/admin.css">
 </head>
 <body class="wide">

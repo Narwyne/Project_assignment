@@ -24,6 +24,7 @@ $currentPage = basename($_SERVER["PHP_SELF"]);
 <div class="nav-secondary">
   <?php if ($role === "admin"): ?>
     <a href="admin.php" class="<?= $currentPage === "admin.php" ? "active" : "" ?>">📂 Categories</a>
+    <a href="profile.php" class="<?= $currentPage === "profile.php" ? "active" : "" ?>">👤 Profile</a>
   <?php else: ?>
     <?php $dashboardPage = $role === "buyer" ? "buyer.php" : "seller.php"; ?>
     <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">🏠 Dashboard</a>
