@@ -29,7 +29,7 @@ $unreadCount = isset($pdo) ? get_unread_count($pdo, $_SESSION["user_id"]) : 0;
     <a href="profile.php" class="<?= $currentPage === "profile.php" ? "active" : "" ?>">👤 Profile</a>
   <?php else: ?>
     <?php $dashboardPage = $role === "buyer" ? "buyer.php" : "seller.php"; ?>
-    <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">🏠 Dashboard</a>
+    <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">🏠 Home</a>
     <a href="feed.php" class="<?= $currentPage === "feed.php" ? "active" : "" ?>">📰 Feed</a>
     <a href="notifications.php" class="<?= $currentPage === "notifications.php" ? "active" : "" ?>">
       🔔 Notifications<?php if ($unreadCount > 0): ?><span class="nav-badge"><?= $unreadCount > 9 ? "9+" : $unreadCount ?></span><?php endif; ?>

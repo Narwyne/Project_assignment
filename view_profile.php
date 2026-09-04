@@ -25,6 +25,7 @@ if ($profileUser["role"] === "buyer") {
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= htmlspecialchars($profileUser["username"]) ?>'s Profile</title>
+  <link rel="stylesheet" href="Styles/DFNP.css">
   <link rel="stylesheet" href="Styles/profile.css">
 </head>
 <body class="wide">

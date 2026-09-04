@@ -68,7 +68,6 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
   <?php foreach ($posts as $post): ?>
     <?php $isMine = $role === "buyer" && (int)$post["buyer_id"] === (int)$my_id; ?>
     <div class="post-card">
-      <?php if ($isMine): ?><span class="badge-mine">Your post</span><?php endif; ?>
 
       <a class="post-author" href="view_profile.php?id=<?= $post['buyer_id'] ?>">
         <?php render_avatar($post["buyer_name"], $post["buyer_avatar"], 32); ?>
@@ -76,7 +75,7 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
           <span class="post-author-name"><?= htmlspecialchars($post["buyer_name"]) ?></span>
         </div>
       </a>
-      <span class="post-date"><?= $post["created_at"] ?></span>
+      <small><?= time_ago($post["created_at"]) ?></small>
 
       <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>

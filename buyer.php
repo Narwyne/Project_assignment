@@ -66,7 +66,7 @@ $repliesStmt = $pdo->prepare("
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Buyer Dashboard</title>
+  <title>My Requests</title>
   <link rel="stylesheet" href="Styles/DFNP.css">
 </head>
 <body class="wide">
@@ -119,7 +119,7 @@ $repliesStmt = $pdo->prepare("
         <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
         <h3><?= htmlspecialchars($post["title"]) ?></h3>
         <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
-        <small><?= $post["created_at"] ?></small>
+        <small><?= time_ago($post["created_at"]) ?></small>
 
         <div class="post-actions">
           <a class="btn-small" href="buyer.php?edit=<?= $post['id'] ?>">Edit</a>

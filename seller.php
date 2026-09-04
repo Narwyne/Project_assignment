@@ -70,7 +70,7 @@ $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAl
           <span class="post-author-name"><?= htmlspecialchars($post["buyer_name"]) ?></span>
         </div>
       </a>
-      <span class="post-date"><?= $post["created_at"] ?></span>
+      <small><?= time_ago($post["created_at"]) ?></small>
       
       <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
