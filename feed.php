@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "config.php";
+require "avatar_helper.php";
 if (!isset($_SESSION["user_id"])) { header("Location: login.php"); exit; }
 $my_id = $_SESSION["user_id"];
 $role  = $_SESSION["role"];
@@ -22,7 +23,7 @@ if ($category_id) {
 $whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
 $stmt = $pdo->prepare("
-  SELECT p.*, u.username AS buyer_name, c.name AS category_name
+  SELECT p.*, u.username AS buyer_name, u.avatar AS buyer_avatar, c.name AS category_name
   FROM posts p
   JOIN users u ON u.id = p.buyer_id
   LEFT JOIN categories c ON c.id = p.category_id
@@ -68,10 +69,18 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
     <?php $isMine = $role === "buyer" && (int)$post["buyer_id"] === (int)$my_id; ?>
     <div class="post-card">
       <?php if ($isMine): ?><span class="badge-mine">Your post</span><?php endif; ?>
+
+      <a class="post-author" href="view_profile.php?id=<?= $post['buyer_id'] ?>">
+        <?php render_avatar($post["buyer_name"], $post["buyer_avatar"], 32); ?>
+        <div>
+          <span class="post-author-name"><?= htmlspecialchars($post["buyer_name"]) ?></span>
+        </div>
+      </a>
+      <span class="post-date"><?= $post["created_at"] ?></span>
+
       <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
       <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
-      <small>Posted by <a href="view_profile.php?id=<?= $post['buyer_id'] ?>"><?= htmlspecialchars($post["buyer_name"]) ?></a> · <?= $post["created_at"] ?></small><br>
 
       <div class="post-actions">
         <?php if ($role === "seller"): ?>

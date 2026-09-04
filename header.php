@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/avatar_helper.php";
+require_once __DIR__ . "/notifications_helper.php";
 $navAvatar = $_SESSION["avatar"] ?? null;
 if ($navAvatar === null && isset($pdo)) {
     $stmt = $pdo->prepare("SELECT avatar FROM users WHERE id = ?");
@@ -9,6 +10,7 @@ if ($navAvatar === null && isset($pdo)) {
 }
 $role = $_SESSION["role"];
 $currentPage = basename($_SERVER["PHP_SELF"]);
+$unreadCount = isset($pdo) ? get_unread_count($pdo, $_SESSION["user_id"]) : 0;
 ?>
 <link rel="stylesheet" href="Styles/header.css">
 <div class="nav">
@@ -29,7 +31,9 @@ $currentPage = basename($_SERVER["PHP_SELF"]);
     <?php $dashboardPage = $role === "buyer" ? "buyer.php" : "seller.php"; ?>
     <a href="<?= $dashboardPage ?>" class="<?= $currentPage === $dashboardPage ? "active" : "" ?>">🏠 Dashboard</a>
     <a href="feed.php" class="<?= $currentPage === "feed.php" ? "active" : "" ?>">📰 Feed</a>
-    <a href="notifications.php" class="<?= $currentPage === "notifications.php" ? "active" : "" ?>">🔔 Notifications</a>
+    <a href="notifications.php" class="<?= $currentPage === "notifications.php" ? "active" : "" ?>">
+      🔔 Notifications<?php if ($unreadCount > 0): ?><span class="nav-badge"><?= $unreadCount > 9 ? "9+" : $unreadCount ?></span><?php endif; ?>
+    </a>
     <a href="profile.php" class="<?= $currentPage === "profile.php" ? "active" : "" ?>">👤 Profile</a>
   <?php endif; ?>
 </div>

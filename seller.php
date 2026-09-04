@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "config.php";
+require "avatar_helper.php";
 if (($_SESSION["role"] ?? "") !== "seller") { header("Location: login.php"); exit; }
 $seller_id = $_SESSION["user_id"];
 
@@ -21,7 +22,7 @@ if ($category_id) {
 $whereSql = $where ? "WHERE " . implode(" AND ", $where) : "";
 
 $stmt = $pdo->prepare("
-  SELECT p.*, u.username AS buyer_name, c.name AS category_name
+  SELECT p.*, u.username AS buyer_name, u.avatar AS buyer_avatar, c.name AS category_name
   FROM posts p
   JOIN users u ON u.id = p.buyer_id
   LEFT JOIN categories c ON c.id = p.category_id
@@ -63,10 +64,17 @@ $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAl
 
   <?php foreach ($posts as $post): ?>
     <div class="post-card">
+      <a class="post-author" href="view_profile.php?id=<?= $post['buyer_id'] ?>">
+        <?php render_avatar($post["buyer_name"], $post["buyer_avatar"], 32); ?>
+        <div>
+          <span class="post-author-name"><?= htmlspecialchars($post["buyer_name"]) ?></span>
+        </div>
+      </a>
+      <span class="post-date"><?= $post["created_at"] ?></span>
+      
       <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
       <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
-      <small>Posted by <a href="view_profile.php?id=<?= $post['buyer_id'] ?>"><?= htmlspecialchars($post["buyer_name"]) ?></a> · <?= $post["created_at"] ?></small><br>
       <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $post['buyer_id'] ?>">Message Buyer</a>
     </div>
   <?php endforeach; ?>

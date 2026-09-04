@@ -10,3 +10,12 @@
     text-align: center;
     padding: 12px 0;
 }
+
+.nav-badge {
+  background: #d92d20; color: #fff; font-size: 10px; font-weight: 700;
+  border-radius: 10px; padding: 1px 6px; margin-left: 4px; vertical-align: 2px;
+}
+
+.notif-row { display: block; text-decoration: none; color: inherit; }
+.notif-row:hover { text-decoration: none; background: #f9f9fb; }
+.notif-row.unread { border-left: 3px solid #4f46e5; }
