@@ -66,32 +66,40 @@ $repliesStmt = $pdo->prepare("
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Requests</title>
+  <title>Buyer Dashboard</title>
   <link rel="stylesheet" href="Styles/DFNP.css">
 </head>
 <body class="wide">
 <div class="page">
   <?php include "header.php"; ?>
 
-  <h2>Post What You're Looking For</h2>
-  <form method="POST" class="post-form">
-    <input type="hidden" name="action" value="add">
-    <input name="title" placeholder="e.g. Looking for iPhone 13, budget 15k" required>
-    <select name="category_id">
-      <option value="">No category</option>
-      <?php foreach ($categories as $c): ?>
-        <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
-      <?php endforeach; ?>
-    </select>
-    <textarea name="description" placeholder="Add more details..." required></textarea>
-    <button type="submit">Post Request</button>
-  </form>
+  <div class="post-form">
+    <h2 class="form-title">New request</h2>
+    <form method="POST">
+      <input type="hidden" name="action" value="add">
+      <div class="form-row">
+        <input name="title" placeholder="e.g. Looking for iPhone 13, budget 15k" required>
+        <select name="category_id">
+          <option value="">No category</option>
+          <?php foreach ($categories as $c): ?>
+            <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <textarea name="description" placeholder="Add more details..." required></textarea>
+      <button type="submit" class="btn-cta">Post request</button>
+    </form>
+  </div>
 
-  <h2>My Requests</h2>
+  <div class="section-head">
+    <h2>My requests</h2>
+    <span class="count-pill"><?= count($posts) ?></span>
+  </div>
+
   <form method="GET" class="search-bar">
     <input type="text" name="q" placeholder="Search my requests..." value="<?= htmlspecialchars($q) ?>">
     <button type="submit">Search</button>
-    <?php if ($q !== ""): ?><a href="buyer.php" class="btn-small">Clear</a><?php endif; ?>
+    <?php if ($q !== ""): ?><a href="buyer.php" class="btn-small btn-muted">Clear</a><?php endif; ?>
   </form>
 
   <?php if (!$posts): ?>
@@ -112,14 +120,19 @@ $repliesStmt = $pdo->prepare("
             <?php endforeach; ?>
           </select>
           <textarea name="description" required><?= htmlspecialchars($post['description']) ?></textarea>
-          <button type="submit">Save</button>
-          <a href="buyer.php" class="btn-small">Cancel</a>
+          <button type="submit" class="btn-small">Save</button>
+          <a href="buyer.php" class="btn-small btn-muted">Cancel</a>
         </form>
       <?php else: ?>
-        <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
-        <h3><?= htmlspecialchars($post["title"]) ?></h3>
+        <?php if ($post['category_name']): $catClass = 'tag-c' . (((int)$post['category_id']) % 5); ?>
+          <span class="tag <?= $catClass ?>"><?= htmlspecialchars($post['category_name']) ?></span>
+        <?php endif; ?>
+
+        <div class="post-card-top">
+          <h3><?= htmlspecialchars($post["title"]) ?></h3>
+          <span class="post-date"><?= date("M j", strtotime($post["created_at"])) ?></span>
+        </div>
         <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
-        <small><?= time_ago($post["created_at"]) ?></small>
 
         <div class="post-actions">
           <a class="btn-small" href="buyer.php?edit=<?= $post['id'] ?>">Edit</a>
@@ -136,11 +149,14 @@ $repliesStmt = $pdo->prepare("
           $sellers = $repliesStmt->fetchAll(PDO::FETCH_ASSOC);
           ?>
           <?php if ($sellers): ?>
-            <strong>Sellers interested:</strong>
+            <span class="replies-label">Sellers interested</span>
             <ul>
               <?php foreach ($sellers as $s): ?>
                 <li>
-                  <a href="view_profile.php?id=<?= $s['sender_id'] ?>"><?= htmlspecialchars($s["username"]) ?></a>
+                  <a class="reply-person" href="view_profile.php?id=<?= $s['sender_id'] ?>">
+                    <span class="mini-avatar"><?= htmlspecialchars(strtoupper(substr($s['username'], 0, 1))) ?></span>
+                    <?= htmlspecialchars($s["username"]) ?>
+                  </a>
                   <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $s['sender_id'] ?>">Reply</a>
                 </li>
               <?php endforeach; ?>

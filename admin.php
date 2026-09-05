@@ -52,8 +52,6 @@ $categories = $pdo->query("
 
 $editId = (int)($_GET["edit"] ?? 0);
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,13 +64,17 @@ $editId = (int)($_GET["edit"] ?? 0);
 <div class="page">
   <?php include "header.php"; ?>
 
-  <h2>Manage Categories</h2>
+  <div class="section-head">
+    <h2>Manage categories</h2>
+    <span class="count-pill"><?= count($categories) ?></span>
+  </div>
+
   <?php if ($error): ?><p class="error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
 
-  <form method="POST" class="post-form">
+  <form method="POST" class="post-form inline-form">
     <input type="hidden" name="action" value="add">
     <input name="name" placeholder="New category name" required>
-    <button type="submit">Add Category</button>
+    <button type="submit" class="btn-cta">Add</button>
   </form>
 
   <?php if (!$categories): ?>
@@ -93,7 +95,7 @@ $editId = (int)($_GET["edit"] ?? 0);
         <div class="cat-row">
           <div>
             <strong><?= htmlspecialchars($cat["name"]) ?></strong>
-            <span class="hint"><?= (int)$cat["post_count"] ?> post<?= $cat["post_count"] == 1 ? "" : "s" ?></span>
+            <span class="count-pill"><?= (int)$cat["post_count"] ?> post<?= $cat["post_count"] == 1 ? "" : "s" ?></span>
           </div>
           <div class="post-actions">
             <a class="btn-small" href="admin.php?edit=<?= $cat['id'] ?>">Rename</a>

@@ -1,0 +1,105 @@
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0; color: #222;
+  background: #f2f4f7;
+}
+a { text-decoration: none; }
+
+/* top bar */
+.lp-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 40px; max-width: 1100px; margin: 0 auto;
+}
+.lp-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.lp-brand span.logo { font-size: 24px; }
+.lp-nav-actions { display: flex; gap: 10px; align-items: center; }
+.lp-btn-ghost { color: #4f46e5; font-weight: 600; font-size: 14px; padding: 9px 16px; border-radius: 8px; }
+.lp-btn-ghost:hover { background: #eef0fe; }
+.lp-btn-solid {
+  background: #4f46e5; color: #fff; font-weight: 600; font-size: 14px;
+  padding: 10px 18px; border-radius: 8px;
+}
+.lp-btn-solid:hover { background: #4338ca; }
+
+/* hero */
+.lp-hero {
+  max-width: 720px; margin: 0 auto; text-align: center;
+  padding: 64px 24px 40px;
+}
+.lp-hero h1 {
+  font-size: 40px; line-height: 1.15; margin: 0 0 16px; color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+.lp-hero p {
+  font-size: 17px; color: #555; margin: 0 0 28px; line-height: 1.5;
+}
+.lp-hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.lp-btn-lg {
+  padding: 13px 26px; border-radius: 9px; font-size: 15px; font-weight: 600;
+}
+.lp-btn-lg.solid { background: #4f46e5; color: #fff; }
+.lp-btn-lg.solid:hover { background: #4338ca; }
+.lp-btn-lg.outline { border: 1px solid #ccd0e0; color: #333; background: #fff; }
+.lp-btn-lg.outline:hover { border-color: #4f46e5; color: #4f46e5; }
+
+/* mock preview strip */
+.lp-preview {
+  max-width: 780px; margin: 0 auto 60px; padding: 0 24px;
+}
+.lp-preview-card {
+  background: #fff; border-radius: 14px; box-shadow: 0 12px 40px rgba(79,70,229,0.14);
+  padding: 18px; display: flex; flex-direction: column; gap: 10px;
+}
+.lp-fake-post {
+  border: 1px solid #eee; border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px; text-align: left;
+}
+.lp-fake-avatar {
+  width: 34px; height: 34px; border-radius: 50%; background: #4f46e5; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.lp-fake-post .lp-fake-title { font-weight: 600; font-size: 14px; }
+.lp-fake-post .lp-fake-sub { font-size: 12px; color: #888; }
+.lp-fake-tag {
+  margin-left: auto; font-size: 11px; font-weight: 600; color: #4338ca; background: #eef0fe;
+  padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+}
+
+/* how it works */
+.lp-section { max-width: 960px; margin: 0 auto; padding: 20px 24px 60px; }
+.lp-section h2 { text-align: center; font-size: 26px; margin: 0 0 36px; color: #1a1a2e; }
+.lp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.lp-step { background: #fff; border-radius: 12px; padding: 22px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.lp-step .icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.lp-step h3 { font-size: 16px; margin: 0 0 6px; }
+.lp-step p { font-size: 13.5px; color: #666; line-height: 1.5; margin: 0; }
+
+/* dual role split */
+.lp-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+.lp-role-card {
+  border-radius: 14px; padding: 26px; color: #fff; text-align: left;
+}
+.lp-role-card.buyer { background: linear-gradient(135deg, #4f46e5, #6366f1); }
+.lp-role-card.seller { background: linear-gradient(135deg, #1a1a2e, #33334d); }
+.lp-role-card .icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.lp-role-card h3 { margin: 0 0 6px; font-size: 17px; }
+.lp-role-card p { margin: 0 0 16px; font-size: 13.5px; opacity: 0.9; line-height: 1.5; }
+.lp-role-card a {
+  display: inline-block; background: rgba(255,255,255,0.15); color: #fff;
+  padding: 8px 16px; border-radius: 7px; font-size: 13px; font-weight: 600;
+}
+.lp-role-card a:hover { background: rgba(255,255,255,0.28); }
+
+/* footer */
+.lp-footer {
+  text-align: center; padding: 24px; font-size: 12.5px; color: #999;
+}
+
+@media (max-width: 640px) {
+  .lp-nav { padding: 16px 20px; }
+  .lp-hero { padding: 44px 20px 30px; }
+  .lp-hero h1 { font-size: 30px; }
+  .lp-steps { grid-template-columns: 1fr; }
+  .lp-roles { grid-template-columns: 1fr; }
+}

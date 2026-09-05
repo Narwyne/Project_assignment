@@ -70,7 +70,7 @@ $backLink = $_SESSION["role"] === "buyer" ? "buyer.php" : "seller.php";
 <div class="page">
   <?php include "header.php"; ?>
 
-  <h2>My Profile</h2>
+  <h2>My profile</h2>
 
   <?php if ($error): ?><p class="error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
   <?php if (isset($_GET["saved"])): ?><p class="success">Profile updated.</p><?php endif; ?>
@@ -88,26 +88,36 @@ $backLink = $_SESSION["role"] === "buyer" ? "buyer.php" : "seller.php";
         </div>
       </div>
 
-      <label>Username</label>
-      <input value="<?= htmlspecialchars($user["username"]) ?>" disabled>
-
-      <label>Role</label>
-      <input value="<?= htmlspecialchars(ucfirst($user["role"])) ?>" disabled>
+      <div class="profile-static-row">
+        <div>
+          <span class="static-label">Username</span>
+          <span class="static-value"><?= htmlspecialchars($user["username"]) ?></span>
+        </div>
+        <div>
+          <span class="static-label">Role</span>
+          <span class="nav-role"><?= htmlspecialchars(ucfirst($user["role"])) ?></span>
+        </div>
+      </div>
 
       <label>Bio</label>
       <textarea name="bio" placeholder="Tell people a bit about yourself..."><?= htmlspecialchars($user["bio"] ?? "") ?></textarea>
 
-      <label>Phone</label>
-      <input name="phone" placeholder="e.g. 0917 123 4567" value="<?= htmlspecialchars($user["phone"] ?? "") ?>">
+      <div class="profile-grid">
+        <div>
+          <label>Phone</label>
+          <input name="phone" placeholder="e.g. 0917 123 4567" value="<?= htmlspecialchars($user["phone"] ?? "") ?>">
+        </div>
+        <div>
+          <label>Location</label>
+          <input name="location" placeholder="e.g. Lapu-Lapu City" value="<?= htmlspecialchars($user["location"] ?? "") ?>">
+        </div>
+      </div>
 
-      <label>Location</label>
-      <input name="location" placeholder="e.g. Lapu-Lapu City" value="<?= htmlspecialchars($user["location"] ?? "") ?>">
-
-      <button type="submit">Save Changes</button>
+      <button type="submit" class="btn-cta btn-cta-block">Save changes</button>
     </form>
   </div>
 
-  <a class="btn-small" href="view_profile.php?id=<?= $user_id ?>">Preview my public profile</a>
+  <a class="btn-small btn-muted" href="view_profile.php?id=<?= $user_id ?>">Preview my public profile</a>
 </div>
 <script>
   document.querySelector('input[type="file"]').addEventListener('change', function () {

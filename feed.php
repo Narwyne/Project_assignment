@@ -48,7 +48,11 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
 <div class="page">
   <?php include "header.php"; ?>
 
-  <h2>All Requests</h2>
+  <div class="section-head">
+    <h2>All requests</h2>
+    <span class="count-pill"><?= count($posts) ?></span>
+  </div>
+
   <form method="GET" class="search-bar">
     <input type="text" name="q" placeholder="Search all requests..." value="<?= htmlspecialchars($q) ?>">
     <select name="category_id" onchange="this.form.submit()">
@@ -58,7 +62,7 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
       <?php endforeach; ?>
     </select>
     <button type="submit">Search</button>
-    <?php if ($q !== "" || $category_id): ?><a href="feed.php" class="btn-small">Clear</a><?php endif; ?>
+    <?php if ($q !== "" || $category_id): ?><a href="feed.php" class="btn-small btn-muted">Clear</a><?php endif; ?>
   </form>
 
   <?php if (!$posts): ?>
@@ -68,22 +72,25 @@ $dashboardLink = $role === "buyer" ? "buyer.php" : "seller.php";
   <?php foreach ($posts as $post): ?>
     <?php $isMine = $role === "buyer" && (int)$post["buyer_id"] === (int)$my_id; ?>
     <div class="post-card">
+      <?php if ($isMine): ?><span class="badge-mine">Your post</span><?php endif; ?>
 
-      <a class="post-author" href="view_profile.php?id=<?= $post['buyer_id'] ?>">
-        <?php render_avatar($post["buyer_name"], $post["buyer_avatar"], 32); ?>
-        <div>
+      <div class="post-card-top">
+        <a class="post-author" href="view_profile.php?id=<?= $post['buyer_id'] ?>">
+          <?php render_avatar($post["buyer_name"], $post["buyer_avatar"], 32); ?>
           <span class="post-author-name"><?= htmlspecialchars($post["buyer_name"]) ?></span>
-        </div>
-      </a>
-      <small><?= time_ago($post["created_at"]) ?></small>
+        </a>
+        <span class="post-date"><?= date("M j", strtotime($post["created_at"])) ?></span>
+      </div>
 
-      <?php if ($post['category_name']): ?><span class="tag"><?= htmlspecialchars($post['category_name']) ?></span><?php endif; ?>
+      <?php if ($post['category_name']): $catClass = 'tag-c' . (((int)$post['category_id']) % 5); ?>
+        <span class="tag <?= $catClass ?>"><?= htmlspecialchars($post['category_name']) ?></span>
+      <?php endif; ?>
       <h3><?= htmlspecialchars($post["title"]) ?></h3>
       <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
 
       <div class="post-actions">
         <?php if ($role === "seller"): ?>
-          <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $post['buyer_id'] ?>">Message Buyer</a>
+          <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $post['buyer_id'] ?>">Message buyer</a>
         <?php elseif ($isMine): ?>
           <a class="btn-small" href="buyer.php?edit=<?= $post['id'] ?>">Edit</a>
         <?php endif; ?>

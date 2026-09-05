@@ -1,107 +1,17 @@
-a { color: #4f46e5; text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* Nav, page, post-form, post-card, buttons, error are styled centrally in DFNP.css.
+   This file only holds admin-page-specific pieces. */
 
-.nav {
-  display: flex; justify-content: space-between; align-items: center;
-  background: #fff; padding: 16px 22px; border-radius: 10px; margin-bottom: 22px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07); flex-wrap: wrap; gap: 10px;
+.post-form.inline-form {
+  display: flex; gap: 10px; align-items: center; padding: 16px 18px;
 }
-.nav-brand { display: flex; align-items: center; gap: 10px; }
-.nav-logo { font-size: 24px; line-height: 1; }
-.nav-title { font-size: 17px; font-weight: 700; color: #222; letter-spacing: -0.2px; }
-.nav-links { display: flex; align-items: center; gap: 14px; margin-left: 12px; font-size: 14px; font-weight: 500; }
-.nav-links a.active { color: #222; text-decoration: underline; text-underline-offset: 3px; }
-.nav-user { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.nav-hello { font-size: 14px; color: #444; }
-.nav-role {
-  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
-  color: #4f46e5; background: #eef0fe; padding: 4px 10px; border-radius: 20px;
-}
-.nav-logout {
-  font-size: 13px; font-weight: 500; color: #fff; background: #4f46e5;
-  padding: 7px 14px; border-radius: 7px; text-decoration: none;
-}
-.nav-logout:hover { background: #4338ca; text-decoration: none; }
-.nav-profile-link { display: flex; align-items: center; gap: 6px; text-decoration: none; }
-.avatar-img { border-radius: 50%; object-fit: cover; display: block; }
-.avatar-fallback {
-  border-radius: 50%; background: #4f46e5; color: #fff; display: flex;
-  align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;
-}
+.post-form.inline-form input { margin-bottom: 0; flex: 1; }
 
-body.wide { font-family: 'Segoe UI', Arial, sans-serif; align-items: flex-start; background: #f2f4f7; margin: 0; min-height: 100vh; }
-.page { width: 100%; max-width: 640px; margin: 0 auto; padding: 20px; }
-h2 { color: #222; }
-
-.post-form {
-  background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 24px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06); display: flex; gap: 10px;
-}
-.post-form input { flex: 1; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
-.post-form button {
-  width: auto; padding: 10px 18px; background: #4f46e5; color: #fff; border: none;
-  border-radius: 8px; font-weight: 500; cursor: pointer;
-}
-.post-form button:hover { background: #4338ca; }
-
-.post-card {
-  background: #fff; padding: 16px; border-radius: 8px; margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06); text-align: left;
-}
 .cat-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-.hint { font-size: 12px; color: #888; margin-left: 8px; }
-.post-actions { display: flex; gap: 8px; }
-.inline-edit { display: flex; gap: 8px; align-items: center; }
-.inline-edit input { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
-
-.btn-small {
-  background: #4f46e5; color: #fff; padding: 6px 12px; border-radius: 6px;
-  font-size: 13px; text-decoration: none; display: inline-block; border: none; cursor: pointer;
-}
-.btn-small:hover { background: #4338ca; text-decoration: none; }
-.btn-muted { background: #999; }
-.btn-muted:hover { background: #777; }
-.btn-danger {
-  background: #d92d20; color: #fff; border: none; border-radius: 6px;
-  padding: 6px 12px; font-size: 13px; cursor: pointer;
-}
-.btn-danger:hover { background: #b42318; }
-
-.error {
-  color: #d92d20; background: #fef3f2; border: 1px solid #fecdca;
-  border-radius: 8px; padding: 8px 10px; font-size: 13px; margin-bottom: 12px;
-}
+.inline-edit { display: flex; gap: 8px; align-items: center; flex: 1; }
+.inline-edit input { flex: 1; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; }
+.inline-edit input:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(79,70,229,0.14); }
 
 @media (max-width: 480px) {
-  .page { padding: 12px; }
-  .nav { padding: 14px 16px; }
-  .nav-title { font-size: 15px; }
-  .nav-hello { display: none; }
-  .nav-links { margin-left: 0; }
-  .post-form { flex-direction: column; }
-  .post-form button { width: 100%; }
+  .post-form.inline-form { flex-direction: column; align-items: stretch; }
   .cat-row { flex-direction: column; align-items: flex-start; }
-}
-
-.nav-secondary {
-  display: flex;
-  gap: 6px;
-  background: #fff;
-  padding: 8px;
-  border-radius: 10px;
-  margin-bottom: 22px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  flex-wrap: wrap;
-}
-.nav-secondary a {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 7px;
-  color: #444;
-}
-.nav-secondary a.active { color: #4f46e5; background: #eef0fe; font-weight: 600; }
-.nav-secondary a:hover { background: #f2f4f7; text-decoration: none; }
-@media (max-width: 480px) {
-  .nav-secondary a { flex: 1; text-align: center; }
 }

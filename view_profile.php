@@ -36,7 +36,7 @@ if ($profileUser["role"] === "buyer") {
 
   <div class="profile-card profile-view">
     <div class="profile-header">
-      <?php render_avatar($profileUser["username"], $profileUser["avatar"], 84); ?>
+      <?php render_avatar($profileUser["username"], $profileUser["avatar"], 76); ?>
       <div>
         <h2><?= htmlspecialchars($profileUser["username"]) ?></h2>
         <span class="nav-role"><?= htmlspecialchars(ucfirst($profileUser["role"])) ?></span>
@@ -64,7 +64,10 @@ if ($profileUser["role"] === "buyer") {
   </div>
 
   <?php if ($profileUser["role"] === "buyer"): ?>
-    <h2>Recent Requests</h2>
+    <div class="section-head">
+      <h2>Recent requests</h2>
+      <span class="count-pill"><?= count($recentPosts) ?></span>
+    </div>
     <?php if (!$recentPosts): ?>
       <p><em>No requests posted yet.</em></p>
     <?php endif; ?>
@@ -72,7 +75,7 @@ if ($profileUser["role"] === "buyer") {
       <div class="post-card">
         <h3><?= htmlspecialchars($post["title"]) ?></h3>
         <p><?= nl2br(htmlspecialchars($post["description"])) ?></p>
-        <small><?= $post["created_at"] ?></small>
+        <small class="post-date"><?= date("M j, Y", strtotime($post["created_at"])) ?></small>
         <?php if (!$isSelf): ?>
           <div class="post-actions">
             <a class="btn-small" href="chat.php?post_id=<?= $post['id'] ?>&with=<?= $profileUser['id'] ?>">Message</a>

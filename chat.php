@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "config.php";
+require "avatar_helper.php";
 require "notifications_helper.php";
 if (!isset($_SESSION["user_id"])) { header("Location: login.php"); exit; }
 
@@ -21,7 +22,7 @@ if ($role === "seller") {
     $with = $post["buyer_id"];
 }
 
-$stmt = $pdo->prepare("SELECT username FROM users WHERE id = ?");
+$stmt = $pdo->prepare("SELECT username, avatar FROM users WHERE id = ?");
 $stmt->execute([$with]);
 $otherUser = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$otherUser) { die("User not found."); }
@@ -67,7 +68,14 @@ $backLink = $role === "buyer" ? "buyer.php" : "seller.php";
 
   <a href="<?= $backLink ?>">&larr; Back</a>
   <h2><?= htmlspecialchars($post["title"]) ?></h2>
-  <p>Chat with <a href="view_profile.php?id=<?= $with ?>"><strong><?= htmlspecialchars($otherUser["username"]) ?></strong></a></p>
+
+  <a class="chat-header" href="view_profile.php?id=<?= $with ?>">
+    <?php render_avatar($otherUser["username"], $otherUser["avatar"], 40); ?>
+    <div>
+      <span class="chat-header-name"><?= htmlspecialchars($otherUser["username"]) ?></span>
+      <span class="chat-header-sub">Tap to view profile</span>
+    </div>
+  </a>
 
   <div class="chat-box">
     <?php foreach ($messages as $m): ?>
